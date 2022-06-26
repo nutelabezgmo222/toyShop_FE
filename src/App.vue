@@ -1,19 +1,32 @@
 <template>
   <div class="container">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld />
+    <h1>Privet mir</h1>
+    <nav>
+      <router-link to="/">
+        Home
+      </router-link>
+      <router-link to="/catalog">
+        Catalog
+      </router-link>
+      <router-link to="/basket">
+        Basket
+      </router-link>
+      <router-link to="/admin">
+        Admin
+      </router-link>
+    </nav>
+    <router-view />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: 'App',
+    components: {
+    }
+};
+
 </script>
 
 <style>
