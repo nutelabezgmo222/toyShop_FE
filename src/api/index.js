@@ -1,9 +1,8 @@
 import axios from 'axios';
 
-export const Http = axios.create(
-  {
-      baseURL: 'http://example.com/api'
-  });
+export const Http = axios.create({
+    baseURL: process.env.VUE_APP_ROOT_API
+});
 
 
 export default Http;
