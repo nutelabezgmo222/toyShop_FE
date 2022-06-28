@@ -33,7 +33,8 @@ export default {
 
 <style>
 @import '@/assets/css/normalize.css';
-
+@import '@/assets/css/font-awesome.min.css';
+@import '@/assets/css/font-awesome.css';
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

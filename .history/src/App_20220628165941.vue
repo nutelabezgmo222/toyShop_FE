@@ -23,7 +23,7 @@ export default {
                 { title: 'Catalog', to: '/catalog' },
                 { title: 'Basket', to: '/basket' },
                 { title: 'Admin', to: '/admin' },
-                {title : 'Log In', to: '/login' },
+              
             ],
         };
     },
@@ -33,7 +33,6 @@ export default {
 
 <style>
 @import '@/assets/css/normalize.css';
-
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

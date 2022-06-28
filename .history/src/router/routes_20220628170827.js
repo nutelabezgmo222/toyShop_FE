@@ -31,8 +31,6 @@ const routes = [
           }
         ]
     },
-    
-    { path: '/login', component: LogInPage},
 ]
 
 export default routes;
