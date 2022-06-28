@@ -1,44 +1,50 @@
 <template>
-  <div class="container">
-    <h1>Privet mir</h1>
-    <nav>
-      <router-link to="/">
-        Home
-      </router-link>
-      <router-link to="/catalog">
-        Catalog
-      </router-link>
-      <router-link to="/basket">
-        Basket
-      </router-link>
-      <router-link to="/admin">
-        Admin
-      </router-link>
-    </nav>
-    <router-view />
+  <div class="wrapper">
+    <Header :links="navigation" />
+    <main>
+      <router-view />
+    </main>
+    <footer></footer>
   </div>
 </template>
 
 <script>
+import Header from '@/components/Molecules/Header';
 
 export default {
     name: 'App',
     components: {
+        Header
+    },
+    data() {
+        return {
+            navigation: [
+                { title: 'Home', to: '/' },
+                { title: 'Catalog', to: '/catalog' },
+                { title: 'Basket', to: '/basket' },
+                { title: 'Admin', to: '/admin' },
+            ],
+        };
     },
 };
 
 </script>
 
 <style>
+@import '@/assets/css/normalize.css';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  padding-top: 70px;
+  background-color: #ECECFF;
+  min-height: 100vh;
+  position: relative;
 }
-.container {
+.wrapper {
     max-width: 1000px;
     margin: 0 auto;
 }
