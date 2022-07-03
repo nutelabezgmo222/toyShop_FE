@@ -4,17 +4,19 @@
     <main>
       <router-view />
     </main>
-    <footer></footer>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from '@/components/Molecules/Header';
+import Footer from '@/components/Molecules/Footer';
 
 export default {
     name: 'App',
     components: {
-        Header
+        Header,
+        Footer
     },
     data() {
         return {
