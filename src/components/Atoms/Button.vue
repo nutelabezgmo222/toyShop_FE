@@ -25,11 +25,12 @@ export default {
   button {
       padding: 10px 20px;
       border: 0;
+      border-radius: 10px;
       cursor: pointer;
       background: none;
   }
   .save {
-
+      color: #fff;
+      background-color: blue;
   }
-  .util {}
 </style>
