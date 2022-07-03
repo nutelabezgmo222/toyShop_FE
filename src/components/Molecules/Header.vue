@@ -18,7 +18,9 @@
         </router-link>
       </nav>
       <div>
-        <Button type="save" button-text="Log in" />
+        <Button
+          type="save"
+          button-text="Log in" />
         <Button button-text="Log out" />
       </div>
     </div>
