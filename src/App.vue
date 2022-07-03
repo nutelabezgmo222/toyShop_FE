@@ -1,10 +1,12 @@
 <template>
-  <div class="wrapper">
-    <Header :links="navigation" />
-    <main>
-      <router-view />
-    </main>
-    <footer></footer>
+  <div class="pt-16">
+    <div class="wrapper">
+      <Header :links="navigation" />
+      <main>
+        <router-view />
+      </main>
+      <footer />
+    </div>
   </div>
 </template>
 
@@ -39,7 +41,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 70px;
   background-color: #ECECFF;
   min-height: 100vh;
   position: relative;

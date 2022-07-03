@@ -1,16 +1,19 @@
 <template>
-  <header>
-    <div class="wrapper">
+  <header class="bg-white fixed h-16 inset-x-0 top-0">
+    <div class="wrapper flex justify-between items-center h-full">
       <div class="logo_wrapper">
-        <img :src="logo" alt="logo">
+        <img
+          :src="logo"
+          class="h-7 w-7"
+          alt="logo">
         <span class="logo_title">{{ projectTitle }}</span>
       </div>
-      <nav>
+      <nav class="flex-grow flex justify-center">
         <router-link
           v-for="link in links"
           :key="link.title"
           :to="link.to"
-          class="navigation_link">
+          class="ml-2 uppercase p-5 navigation_link">
           {{ link.title }}
         </router-link>
       </nav>
@@ -46,42 +49,8 @@ export default {
 </script>
 
 <style scoped>
-  header {
-      position: fixed;
-      height: 70px;
-      top: 0;
-      left: 0;
-      right: 0;
-      background-color: #fff;
-  }
-
-  .wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 100%;
-  }
-
-  .logo_wrapper img {
-      width: 30px;
-      height: 30px;
-  }
-
-  nav {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-  }
-
   .router-link-active {
       background-color: #ECECFF;
-  }
-
-  .navigation_link {
-      margin-left: 10px;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      padding: 20px;
   }
 
   .navigation_link:hover {
