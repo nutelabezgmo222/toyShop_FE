@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-justify">
     <div
       v-if="isLoading"
       class="loader">
@@ -8,45 +8,40 @@
     <div
       v-else
       class="content">
-      <div>
-        <label>
-          <p>Title: </p>
-          <input 
-            v-model="newToy.title"
-            type="text">
-        </label>
-      </div>
-      <div>
-        <label>
-          <p>Description: </p>
-          <input
-            v-model="newToy.description"
-            type="text">
-        </label>
-      </div>
-      <div>
-        <label>
-          <p>Price: </p>
-          <input 
-            v-model="newToy.price"
-            type="text">
-        </label>
-      </div>
 
-      <selector 
-        title="Gender"
-        :options="genders"
-        @updated="newToy.gender_id = $event" />
-  
-      <selector 
-        title="Age limit"
-        :options="enchancedLimits"
-        @updated="newToy.age_limit_id = $event" />
+        <input-field
+          title="Title"
+          type="text"
+          :value="newToy.title"
+          @input="newToy.title = $event" />
 
-      <selector 
-        title="Brand"
-        :options="enchancedBrands"
-        @updated="newToy.brand_id = $event" />
+        <input-field
+          title="Description"
+          type="text"
+          :value="newToy.description"
+          @input="newToy.description = $event" />
+
+        <input-field
+          title="Price"
+          type="number"
+          :value="newToy.price"
+          @input="newToy.price = $event" />
+
+        <selector 
+          title="Gender"
+          :options="genders"
+          @updated="newToy.gender_id = $event" />
+
+        <selector 
+          title="Age limit"
+          :options="enchancedLimits"
+          @updated="newToy.age_limit_id = $event" />
+
+        <selector 
+          error="true"
+          title="Brand"
+          :options="enchancedBrands"
+          @updated="newToy.brand_id = $event" />
 
       <div>
         <button @click="onToyCreate">
@@ -63,10 +58,12 @@ import { getBrands } from '@/api/brand';
 import { createToy } from '@/api/toys';
 
 import Selector from '@/components/Atoms/Select';
+import InputField from '@/components/Atoms/Input';
 
 export default {
     components: {
-        Selector
+        Selector,
+        InputField
     },
     data() {
         return {
@@ -106,7 +103,51 @@ export default {
         },
     },
     mounted() {
-        this.loadData();
+        // this.loadData();
+        this.ageLimits = [
+            {
+                id: 1,
+                lower_age_limit: 0,
+                upper_age_limit: 4
+            },
+            {
+                id: 2,
+                lower_age_limit: 5,
+                upper_age_limit: 8
+            },
+            {
+                id: 3,
+                lower_age_limit: 9,
+                upper_age_limit: 12
+            },
+            {
+                id: 4,
+                lower_age_limit: 13,
+                upper_age_limit: 18
+            }
+        ];
+        this.brands = [
+            {
+                id: 1,
+                title: "Brand 1"
+            },
+            {
+                id: 2,
+                title: "Brand 2"
+            },
+            {
+                id: 3,
+                title: "Brand 3"
+            },
+            {
+                id: 4,
+                title: "Brand 4"
+            },
+            {
+                id: 5,
+                title: "Brand 1"
+            }
+        ];
     },
     methods: {
         loadData() {
@@ -151,5 +192,4 @@ export default {
 </script>
 
 <style>
-
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="form_element mb-4">
     <label>
       <p>{{ title }} </p>
-      <select v-model="selectedOption">
+      <select :class="{error: error}" v-model="selectedOption">
         <option
           v-for="option in options"
           :key="option.id"
@@ -33,6 +33,11 @@ export default {
         selectedByDefault: {
             type: [String, Number],
             default: null,
+            required: false
+        },
+        error: {
+            type: Boolean,
+            default: false,
             required: false
         }
     },
