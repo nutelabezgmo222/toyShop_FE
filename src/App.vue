@@ -1,22 +1,22 @@
 <template>
-  <div class="pt-16">
-    <div class="wrapper">
-      <Header :links="navigation" />
-      <main>
-        <router-view />
-      </main>
-      <footer />
-    </div>
+  <div class="wrapper">
+    <Header :links="navigation" />
+    <main>
+      <router-view />
+    </main>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Header from '@/components/Molecules/Header';
+import Footer from '@/components/Molecules/Footer';
 
 export default {
     name: 'App',
     components: {
-        Header
+        Header,
+        Footer
     },
     data() {
         return {

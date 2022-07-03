@@ -1,7 +1,7 @@
 <template>
   <header class="bg-white fixed h-16 inset-x-0 top-0">
     <div class="wrapper flex justify-between items-center h-full">
-      <div class="logo_wrapper">
+      <div class="flex">
         <img
           :src="logo"
           class="h-7 w-7"
@@ -18,7 +18,9 @@
         </router-link>
       </nav>
       <div>
-        <Button button-text="Log in" />
+        <Button
+          type="save"
+          button-text="Log in" />
         <Button button-text="Log out" />
       </div>
     </div>
