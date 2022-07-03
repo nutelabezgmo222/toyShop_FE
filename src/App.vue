@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper pt-16">
     <Header :links="navigation" />
     <main>
       <router-view />
