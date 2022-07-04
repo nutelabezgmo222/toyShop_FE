@@ -1,7 +1,7 @@
 <template>
-  <footer>
-    <div class="wrapper">
-      <p>Powered by <span class="team-logo">Kotleta team</span></p>
+  <footer class="absolute inset-x-0 bottom-0">
+    <div class="wrapper flex">
+      <p>Powered by <span class="uppercase italic">Kotleta team</span></p>
     </div>
   </footer>
 </template>
@@ -13,19 +13,7 @@ export default {
 </script>
 
 <style>
-  footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 70px;
-      background-color: #C0C0CE;
-  }
-  .wrapper {
-      display: flex;
-  }
-  .team-logo {
-      text-transform: uppercase;
-      font-style: italic;
-  }
+    footer {
+        background-color: #C0C0CE;
+    }
 </style>
