@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white fixed h-16 inset-x-0 top-0">
+  <header class="bg-white fixed inset-x-0 top-0">
     <div class="wrapper flex justify-between items-center h-full">
       <div class="flex">
         <img
