@@ -1,22 +1,24 @@
 <template>
-  <div class="pt-16">
-    <div class="wrapper">
-      <Header :links="navigation" />
-      <main>
-        <router-view />
-      </main>
-      <footer />
-    </div>
+  <div class="wrapper py-16">
+    <Header
+      class="h-16"
+      :links="navigation" />
+    <main class="w-full">
+      <router-view class="w-full py-10" />
+    </main>
+    <Footer class="h-16" />
   </div>
 </template>
 
 <script>
 import Header from '@/components/Molecules/Header';
+import Footer from '@/components/Molecules/Footer';
 
 export default {
     name: 'App',
     components: {
-        Header
+        Header,
+        Footer
     },
     data() {
         return {
@@ -36,7 +38,7 @@ export default {
 @import '@/assets/css/normalize.css';
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -46,7 +48,7 @@ export default {
   position: relative;
 }
 .wrapper {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 .form_element select, .form_element input {
