@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="wrapper flex h-full">
-        <sub-header-item
-          v-for="item in navigationItems"
-          :key="item.id"
-          :title="item.title"
-          :sub-items="item.subItems"
-          class="h-full px-5"/>
+      <sub-header-item
+        v-for="item in navigationItems"
+        :key="item.id"
+        :title="item.title"
+        :sub-items="item.subItems"
+        class="h-full px-5" />
     </div>
   </div>
 </template>

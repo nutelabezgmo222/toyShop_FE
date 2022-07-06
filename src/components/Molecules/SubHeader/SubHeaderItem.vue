@@ -11,7 +11,7 @@
         <li
           v-for="subItem in subItems"
           :key="subItem.key"
-          class="border-b-2 border-zinc-700" >
+          class="border-b-2 border-zinc-700">
           <router-link
             class="block py-3 px-7 text-left hover:bg-blue-300 transition"
             :to="subItem.path">
