@@ -12,7 +12,15 @@ const routes = [
         path: '/basket',
         component: BasketPage
     },
-    { path: '/catalog', component: CatalogPage },
+    { 
+        path: '/catalog',
+        component: CatalogPage
+    },
+    { 
+        path: '/catalog/category/:categoryId/subcategory/:subCategoryId',
+        component: CatalogPage,
+        props: true
+    },
     { 
         path: '/admin',
         component: AdminPage,

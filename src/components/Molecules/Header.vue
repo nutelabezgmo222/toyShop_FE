@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white fixed inset-x-0 top-0">
+  <header :class="['bg-white fixed inset-x-0 top-0 drop-shadow-sm', headerHeight]">
     <div class="wrapper flex justify-between items-center h-full">
       <div class="flex">
         <img
@@ -24,28 +24,78 @@
         <Button button-text="Log out" />
       </div>
     </div>
+
+    <sub-header 
+      v-if="!isLoading && subHeaderByRoute"
+      :class="['bg-red-300', subHeaderHeight]"
+      :navigation-items="subHeaderByRoute" />
   </header>
 </template>
 
 <script>
+import { getCategories } from '@/api/categories';
 import Logo from '@/assets/images/logo.png';
 import Button from '@/components/Atoms/Button';
+import SubHeader from '@/components/Molecules/SubHeader/SubHeader';
+
+import { createCategoryMenu } from '@/utils/createSubmenu';
 
 export default {
     components: {
-        Button
+        Button,
+        SubHeader
     },
     props: {
         links: {
             type: Array,
             required: true
         },
+        headerHeight: {
+            type: String,
+            default: 'h-16',
+            required: false,
+        },
+        subHeaderHeight: {
+            type: String,
+            default: 'h-8',
+            required: false,
+        },
     },
     data() {
         return {
             logo: Logo,
-            projectTitle: 'Arolee'
+            projectTitle: 'Arolee',
+            isLoading: false,
+            categories: [],
         }
+    },
+    computed: {
+        subHeaderByRoute() {
+            let route = this.$route.fullPath;
+
+            if(route.startsWith('/catalog')) {
+                return createCategoryMenu(this.categories);
+            }
+
+            return null;
+        }
+    },
+    mounted() {
+        this.loadData();
+    },
+    methods: {
+        loadData() {
+            this.isLoading = true;
+
+            return this.getCategories().then(() => {
+                this.isLoading = false;
+            });
+        },
+        getCategories() {
+            return getCategories().then((responce) => {
+                this.categories = responce.list;
+            });
+        },
     },
 }
 </script>
