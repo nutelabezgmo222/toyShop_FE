@@ -1,58 +1,76 @@
 <template>
-  <div>
+  <div class="text-justify">
     <div
       v-if="isLoading"
-      class="loader">
-      Loading....
+      class="w-72">
+      <loading-spinner />
     </div>
     <div
       v-else
       class="content">
-      <div>
-        <label>
-          <p>Title: </p>
-          <input 
-            v-model="newToy.title"
-            type="text">
-        </label>
-      </div>
-      <div>
-        <label>
-          <p>Description: </p>
-          <input
-            v-model="newToy.description"
-            type="text">
-        </label>
-      </div>
-      <div>
-        <label>
-          <p>Price: </p>
-          <input 
-            v-model="newToy.price"
-            type="text">
-        </label>
-      </div>
+      <input-field
+        title="Title"
+        type="text"
+        :value="newToy.title"
+        :error="!newToy.title && status.isSent"
+        @input="newToy.title = $event" />
 
-      <selector 
+      <input-field
+        title="Description"
+        type="text"
+        :value="newToy.description"
+        :error="!newToy.description && status.isSent"
+        @input="newToy.description = $event" />
+
+      <input-field
+        title="Price"
+        type="number"
+        :value="newToy.price"
+        :error="!newToy.price && status.isSent"
+        @input="newToy.price = $event" />
+
+      <select-filed 
         title="Gender"
         :options="genders"
+        :error="!newToy.gender_id && status.isSent"
         @updated="newToy.gender_id = $event" />
-  
-      <selector 
+
+      <select-filed
         title="Age limit"
         :options="enchancedLimits"
+        :error="!newToy.age_limit_id && status.isSent"
         @updated="newToy.age_limit_id = $event" />
 
-      <selector 
+      <select-filed 
         title="Brand"
         :options="enchancedBrands"
+        :error="!newToy.brand_id && status.isSent"
         @updated="newToy.brand_id = $event" />
 
+      <input-field
+        title="Image URL"
+        type="text"
+        :value="newToy.image"
+        :error="!newToy.image && status.isSent"
+        @input="newToy.image = $event" />
+
       <div>
-        <button @click="onToyCreate">
-          Save
-        </button>
+        <Button
+          type="save"
+          button-text="Save"
+          @click="onToyCreate" />
       </div>
+
+      <p
+        v-if="status.isSent && !status.isSuccessfully"
+        class="p-4 bg-red-400 rounded-md mt-4">
+        There are some errors
+      </p>
+      <p
+        v-else-if="status.isSent && status.isSuccessfully"
+        class="p-4 bg-lime-400 rounded-md mt-4">
+        Toy has been successfully created
+      </p>
     </div>
   </div>
 </template>
@@ -62,11 +80,17 @@ import { getAgeLimits } from '@/api/subInformation';
 import { getBrands } from '@/api/brand';
 import { createToy } from '@/api/toys';
 
-import Selector from '@/components/Atoms/Select';
+import SelectFiled from '@/components/Atoms/SelectFiled';
+import InputField from '@/components/Atoms/InputField';
+import Button from '@/components/Atoms/Button.vue';
+import LoadingSpinner from '@/components/Atoms/LoadingSpinner.vue';
 
 export default {
     components: {
-        Selector
+        SelectFiled,
+        InputField,
+        Button,
+        LoadingSpinner
     },
     data() {
         return {
@@ -85,8 +109,13 @@ export default {
 
                 title: '',
                 description: '',
-                price: 0
-            }
+                price: 0,
+                image: ''
+            },
+            status: {
+                isSent: false,
+                isSuccessfully: false
+            },
         };
     },
     computed: {
@@ -132,11 +161,16 @@ export default {
             });
         },
         onToyCreate() {
+            this.status.isSent = true;
             if(!this.validateToy) return;
 
-            return createToy(this.newToy).then((response) => {
-                console.log(response);
-            });
+            return createToy(this.newToy)
+                .then(() => {
+                    this.status.isSuccessfully = true;
+                })
+                .catch(() => {
+                    this.status.isSuccessfully = false; 
+                });
         },
         validateToy() {
             return this.newToy.title &&
@@ -147,9 +181,4 @@ export default {
         }
     }
 };
-
 </script>
-
-<style>
-
-</style>
