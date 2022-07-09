@@ -51,4 +51,18 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
 }
+.form_element select, .form_element input {
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.form_element select.error, .form_element input.error {
+    border-color: #FF5F5F;
+}
+.form_element select {
+  padding: 8px;
+}
+.form_element input {
+  padding: 5px;
+}
 </style>
