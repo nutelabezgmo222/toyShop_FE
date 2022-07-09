@@ -7,7 +7,7 @@ export function getAgeLimits(subCategoryId) {
         query = '?subCategoryId=' + subCategoryId
     }
 
-    return Http.get('/age_limits')
+    return Http.get('/age_limits' + query)
         .then(response => response.data)
         .catch(err => {
             throw err;
