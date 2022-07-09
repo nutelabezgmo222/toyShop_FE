@@ -4,7 +4,7 @@
       class="h-16"
       :links="navigation" />
     <main class="w-full">
-      <router-view class="w-full py-10" />
+      <router-view class="w-full py-16" />
     </main>
     <Footer class="h-16" />
   </div>

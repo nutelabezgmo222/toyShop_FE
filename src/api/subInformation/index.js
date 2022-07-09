@@ -1,6 +1,12 @@
 import { Http } from '@/api';
 
-export function getAgeLimits() {
+export function getAgeLimits(subCategoryId) {
+    let query = '';
+
+    if(subCategoryId) {
+        query = '?subCategoryId=' + subCategoryId
+    }
+
     return Http.get('/age_limits')
         .then(response => response.data)
         .catch(err => {
