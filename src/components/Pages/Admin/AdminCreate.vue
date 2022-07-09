@@ -2,7 +2,7 @@
   <div class="text-justify">
     <div
       v-if="isLoading"
-      class="w-72 grid justify-center">
+      class="w-72">
       <loading-spinner />
     </div>
     <div
@@ -29,19 +29,19 @@
         :error="!newToy.price && status.isSent"
         @input="newToy.price = $event" />
 
-      <selector 
+      <select-filed 
         title="Gender"
         :options="genders"
         :error="!newToy.gender_id && status.isSent"
         @updated="newToy.gender_id = $event" />
 
-      <selector
+      <select-filed
         title="Age limit"
         :options="enchancedLimits"
         :error="!newToy.age_limit_id && status.isSent"
         @updated="newToy.age_limit_id = $event" />
 
-      <selector 
+      <select-filed 
         title="Brand"
         :options="enchancedBrands"
         :error="!newToy.brand_id && status.isSent"
@@ -80,18 +80,18 @@ import { getAgeLimits } from '@/api/subInformation';
 import { getBrands } from '@/api/brand';
 import { createToy } from '@/api/toys';
 
-import Selector from '@/components/Atoms/Select';
-import InputField from '@/components/Atoms/Input';
+import SelectFiled from '@/components/Atoms/SelectFiled';
+import InputField from '@/components/Atoms/InputField';
 import Button from '@/components/Atoms/Button.vue';
 import LoadingSpinner from '@/components/Atoms/LoadingSpinner.vue';
 
 export default {
     components: {
-				Selector,
-				InputField,
-				Button,
+        SelectFiled,
+        InputField,
+        Button,
         LoadingSpinner
-		},
+    },
     data() {
         return {
             isLoading: false,
@@ -110,7 +110,7 @@ export default {
                 title: '',
                 description: '',
                 price: 0,
-								image: ''
+                image: ''
             },
             status: {
                 isSent: false,
@@ -161,11 +161,11 @@ export default {
             });
         },
         onToyCreate() {
-						this.status.isSent = true;
+            this.status.isSent = true;
             if(!this.validateToy) return;
 
             return createToy(this.newToy)
-                .then((response) => {
+                .then(() => {
                     this.status.isSuccessfully = true;
                 })
                 .catch(() => {

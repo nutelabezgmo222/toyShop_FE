@@ -27,7 +27,7 @@ export default {
         },
         value: {
             type: [String, Number],
-            default: "",
+            default: '',
             required: false,
             note: 'value of input'
         },
@@ -45,8 +45,7 @@ export default {
     },
     watch: {
         inputValue(newValue) {
-						console.log(newValue);
-						this.$emit('input', newValue);
+            this.$emit('input', newValue);
         },
     },
 }
