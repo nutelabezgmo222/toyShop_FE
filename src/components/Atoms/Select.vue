@@ -2,7 +2,9 @@
   <div class="form_element mb-4">
     <label>
       <p>{{ title }} </p>
-      <select :class="{error: error}" v-model="selectedOption">
+      <select
+        v-model="selectedOption"
+        :class="{error: error}">
         <option
           v-for="option in options"
           :key="option.id"

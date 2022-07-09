@@ -2,52 +2,75 @@
   <div class="text-justify">
     <div
       v-if="isLoading"
-      class="loader">
-      Loading....
+      class="w-72 grid justify-center">
+      <loading-spinner />
     </div>
     <div
       v-else
       class="content">
+      <input-field
+        title="Title"
+        type="text"
+        :value="newToy.title"
+        :error="!newToy.title && status.isSent"
+        @input="newToy.title = $event" />
 
-        <input-field
-          title="Title"
-          type="text"
-          :value="newToy.title"
-          @input="newToy.title = $event" />
+      <input-field
+        title="Description"
+        type="text"
+        :value="newToy.description"
+        :error="!newToy.description && status.isSent"
+        @input="newToy.description = $event" />
 
-        <input-field
-          title="Description"
-          type="text"
-          :value="newToy.description"
-          @input="newToy.description = $event" />
+      <input-field
+        title="Price"
+        type="number"
+        :value="newToy.price"
+        :error="!newToy.price && status.isSent"
+        @input="newToy.price = $event" />
 
-        <input-field
-          title="Price"
-          type="number"
-          :value="newToy.price"
-          @input="newToy.price = $event" />
+      <selector 
+        title="Gender"
+        :options="genders"
+        :error="!newToy.gender_id && status.isSent"
+        @updated="newToy.gender_id = $event" />
 
-        <selector 
-          title="Gender"
-          :options="genders"
-          @updated="newToy.gender_id = $event" />
+      <selector
+        title="Age limit"
+        :options="enchancedLimits"
+        :error="!newToy.age_limit_id && status.isSent"
+        @updated="newToy.age_limit_id = $event" />
 
-        <selector 
-          title="Age limit"
-          :options="enchancedLimits"
-          @updated="newToy.age_limit_id = $event" />
+      <selector 
+        title="Brand"
+        :options="enchancedBrands"
+        :error="!newToy.brand_id && status.isSent"
+        @updated="newToy.brand_id = $event" />
 
-        <selector 
-          error="true"
-          title="Brand"
-          :options="enchancedBrands"
-          @updated="newToy.brand_id = $event" />
+      <input-field
+        title="Image URL"
+        type="text"
+        :value="newToy.image"
+        :error="!newToy.image && status.isSent"
+        @input="newToy.image = $event" />
 
       <div>
-        <button @click="onToyCreate">
-          Save
-        </button>
+        <Button
+          type="save"
+          button-text="Save"
+          @click="onToyCreate" />
       </div>
+
+      <p
+        v-if="status.isSent && !status.isSuccessfully"
+        class="p-4 bg-red-400 rounded-md mt-4">
+        There are some errors
+      </p>
+      <p
+        v-else-if="status.isSent && status.isSuccessfully"
+        class="p-4 bg-lime-400 rounded-md mt-4">
+        Toy has been successfully created
+      </p>
     </div>
   </div>
 </template>
@@ -59,12 +82,16 @@ import { createToy } from '@/api/toys';
 
 import Selector from '@/components/Atoms/Select';
 import InputField from '@/components/Atoms/Input';
+import Button from '@/components/Atoms/Button.vue';
+import LoadingSpinner from '@/components/Atoms/LoadingSpinner.vue';
 
 export default {
     components: {
-        Selector,
-        InputField
-    },
+				Selector,
+				InputField,
+				Button,
+        LoadingSpinner
+		},
     data() {
         return {
             isLoading: false,
@@ -82,8 +109,13 @@ export default {
 
                 title: '',
                 description: '',
-                price: 0
-            }
+                price: 0,
+								image: ''
+            },
+            status: {
+                isSent: false,
+                isSuccessfully: false
+            },
         };
     },
     computed: {
@@ -103,51 +135,7 @@ export default {
         },
     },
     mounted() {
-        // this.loadData();
-        this.ageLimits = [
-            {
-                id: 1,
-                lower_age_limit: 0,
-                upper_age_limit: 4
-            },
-            {
-                id: 2,
-                lower_age_limit: 5,
-                upper_age_limit: 8
-            },
-            {
-                id: 3,
-                lower_age_limit: 9,
-                upper_age_limit: 12
-            },
-            {
-                id: 4,
-                lower_age_limit: 13,
-                upper_age_limit: 18
-            }
-        ];
-        this.brands = [
-            {
-                id: 1,
-                title: "Brand 1"
-            },
-            {
-                id: 2,
-                title: "Brand 2"
-            },
-            {
-                id: 3,
-                title: "Brand 3"
-            },
-            {
-                id: 4,
-                title: "Brand 4"
-            },
-            {
-                id: 5,
-                title: "Brand 1"
-            }
-        ];
+        this.loadData();
     },
     methods: {
         loadData() {
@@ -173,11 +161,16 @@ export default {
             });
         },
         onToyCreate() {
+						this.status.isSent = true;
             if(!this.validateToy) return;
 
-            return createToy(this.newToy).then((response) => {
-                console.log(response);
-            });
+            return createToy(this.newToy)
+                .then((response) => {
+                    this.status.isSuccessfully = true;
+                })
+                .catch(() => {
+                    this.status.isSuccessfully = false; 
+                });
         },
         validateToy() {
             return this.newToy.title &&
@@ -188,8 +181,4 @@ export default {
         }
     }
 };
-
 </script>
-
-<style>
-</style>

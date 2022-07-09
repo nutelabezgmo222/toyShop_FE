@@ -1,30 +1,29 @@
 <template>
   <div class="form_element mb-4">
-		<label>
-			<p>{{ title }} </p>
-			<input
-				:class="{error: error}"
-				:type="type"
-				:value="value"
-				v-model="inputValue" />
-		</label>
+    <label>
+      <p>{{ title }} </p>
+      <input
+        v-model="inputValue"
+        :class="{error: error}"
+        :type="type"
+        :value="value">
+    </label>
   </div>
 </template>
 
 <script>
 export default {
     name: 'Input',
-    // note: 'option item should have id and title props: options = [{id:1 , title: "option title"}]',
     props: {
-				type: {
-						type: String,
-						default: 'text',
-						requred: true
-				},
-				title: {
-						type: String,
-						default: 'Selector',
-						requred: true
+        type: {
+            type: String,
+            default: 'text',
+            requred: true
+        },
+        title: {
+            type: String,
+            default: 'Selector',
+            requred: true
         },
         value: {
             type: [String, Number],
@@ -46,14 +45,9 @@ export default {
     },
     watch: {
         inputValue(newValue) {
-					console.log(newValue);
-            this.$emit('input', newValue);
+						console.log(newValue);
+						this.$emit('input', newValue);
         },
     },
-    // mounted() {
-    //     if(this.selectedByDefault) {
-    //         this.selectedOption = this.selectedByDefault;
-    //     }
-    // },
 }
 </script>
