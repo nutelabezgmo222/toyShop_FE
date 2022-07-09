@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Admin page</h1>
-    <div class="flex mt-10">
+    <div class="flex">
       <nav class="flex flex-col h-96 w-1/4 bg-red-100 mr-10 items-center border rounded">
         <router-link
           v-for="link in links"
