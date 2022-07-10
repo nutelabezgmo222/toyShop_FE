@@ -3,7 +3,9 @@
     <h2 class="mb-3 text-xl font-bold">
       Registration form
     </h2>
-    <form class="flex flex-col items-center">
+    <form 
+      class="flex flex-col items-center"
+      @submit.prevent>
       <div class="grid grid-cols-2">
         <div class="mr-5">
           <input-field
@@ -73,13 +75,13 @@ export default {
     },
     methods: {
         register() {
-            return register(this.getUserData);
+            return register(this.getUserData());
         },
         getUserData() {
             return {
                 name: this.name,
                 surname: this.surname,
-                phoneNumber: this.phoneNumber,
+                phone_number: this.phoneNumber,
                 email: this.email,
                 password: this.password
             };

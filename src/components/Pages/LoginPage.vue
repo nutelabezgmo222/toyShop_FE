@@ -1,6 +1,8 @@
 <template>
   <div>
-    <form class="flex flex-col items-center">
+    <form
+      class="flex flex-col items-center"
+      @submit.prevent>
       <input-field
         title="Login"
         type="text"
@@ -57,14 +59,10 @@ export default {
         },
         getLoginData() {
             return {
-                login: this.login,
+                email: this.login,
                 password: this.password
             };
         }
     },
 }
 </script>
-
-<style>
-
-</style>
