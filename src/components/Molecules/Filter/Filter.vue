@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getAgeLimits } from '@/api/subInformation';
+import { getAgeLimits, getGenders } from '@/api/subInformation';
 import { getBrands } from '@/api/brand';
 
 import LoadingSpinner from '@/components/Atoms/LoadingSpinner';
@@ -53,6 +53,7 @@ export default {
             isLoading: false,
             ageLimits: [],
             brands: [],
+            genders: [],
             appliedFilters: {},
             FieldTypes
         };
@@ -87,6 +88,19 @@ export default {
                 });
             }
 
+            if(this.genders && this.genders.length) {
+                filters.push({
+                    id: 3,
+                    title: 'Genders',
+                    objectProperty: 'gender_category',
+                    type: this.FieldTypes.MULTI_CHOICE,
+                    items: this.genders.map(gender => ({
+                          value: gender.id,
+                          title: gender.title
+                    }))
+                });
+            }
+
             return filters;
         },
     },
@@ -99,7 +113,8 @@ export default {
 
             let promises = [
                 this.getAgeLimits(this.subCategoryId),
-                this.getBrands(this.subCategoryId)
+                this.getBrands(this.subCategoryId),
+                this.getGenders(this.subCategoryId)
             ];
 
             return Promise.all(promises).then(() => {
@@ -114,6 +129,11 @@ export default {
         getBrands(subCategoryId) {
             return getBrands(subCategoryId).then(data => {
                 this.brands = data.list;
+            });
+        },
+        getGenders(subCategoryId) {
+            return getGenders(subCategoryId).then(data => {
+                this.genders = data.list;
             });
         },
         onCheckboxChange(objProp, filterItem) {

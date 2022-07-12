@@ -22,3 +22,16 @@ export function getCountries() {
         });
 }
 
+export function getGenders(subCategoryId) {
+    let query = '';
+
+    if(subCategoryId) {
+        query = '?subCategoryId=' + subCategoryId
+    }
+
+    return Http.get('/genders'+ query)
+        .then(response => response.data)
+        .catch(err => {
+            throw err;
+        });
+}
