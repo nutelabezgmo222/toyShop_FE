@@ -1,27 +1,43 @@
 <template>
-  <div class="wrapper py-16">
-    <Header
-      class="h-16"
-      :links="navigation" />
-    <main class="w-full">
-      <router-view class="w-full py-16" />
-    </main>
-    <Footer class="h-16" />
+  <div>
+    <div
+      v-if="isLoading"
+      class="h-screen flex flex-col align-center justify-center">
+      <h1 class="text-xl font-bold mb-10">
+        Please wait while app is loading
+      </h1>
+      <loading-spinner />
+    </div>
+    <div
+      v-else
+      class="wrapper py-16">
+      <Header
+        class="h-16"
+        :links="navigation" />
+      <main class="w-full">
+        <router-view class="w-full py-16" />
+      </main>
+      <Footer class="h-16" />
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Header from '@/components/Molecules/Header';
 import Footer from '@/components/Molecules/Footer';
+import LoadingSpinner from '@/components/Atoms/LoadingSpinner';
 
 export default {
     name: 'App',
     components: {
         Header,
-        Footer
+        Footer,
+        LoadingSpinner
     },
     data() {
         return {
+            isLoading: true,
             navigation: [
                 { title: 'Home', to: '/' },
                 { title: 'Catalog', to: '/catalog' },
@@ -30,6 +46,17 @@ export default {
             ],
         };
     },
+    mounted() {
+        this.isLoading = true;
+
+        this.tryToLogIn()
+            .finally(() => {
+                this.isLoading = false;
+            });
+    },
+    methods: {
+        ...mapActions(['tryToLogIn'])
+    }
 };
 
 </script>

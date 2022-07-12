@@ -3,6 +3,10 @@
     <form
       class="flex flex-col items-center"
       @submit.prevent>
+      <notification
+        :message="errorMessage"
+        :hide-after="5000"
+        class="mb-3" />
       <input-field
         title="Login"
         type="text"
@@ -20,7 +24,7 @@
           type="save"
           button-text="Log in"
           class="w-56"
-          @click="logIn" />
+          @click="onLogin" />
       </div>
 
       <div class="flex items-center mt-3">
@@ -38,24 +42,36 @@
 </template>
 
 <script>
-import { logIn } from '@/api/logIn';
 import InputField from '@/components/Atoms/InputField';
+import Notification from '@/components/Atoms/Notification';
 import Button from '@/components/Atoms/Button.vue';
+import { mapActions } from 'vuex';
 
 export default {
     components: {
         InputField,
+        Notification,
         Button
     },
     data() {
         return {
             login: '',
-            password: ''
+            password: '',
+            errorMessage: ''
         };
     },
     methods: {
-        logIn() {
-            return logIn(this.getLoginData());
+        ...mapActions(['logIn']),
+        onLogin() {
+            this.errorMessage = '';
+
+            return this.logIn(this.getLoginData())
+                .then(() => {
+                    this.$router.push('/');
+                })
+                .catch(() => {
+                    this.errorMessage = 'Password or email is incorrect';
+                });
         },
         getLoginData() {
             return {

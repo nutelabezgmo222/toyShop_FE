@@ -16,7 +16,7 @@ const routes = [
     },
     { 
         path: '/login',
-        component: LoginPage
+        component: LoginPage,
     },
     { 
         path: '/basket',

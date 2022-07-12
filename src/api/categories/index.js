@@ -1,4 +1,4 @@
-import { Http } from '@/api';
+import Http from '@/api';
 
 export function getCategories() {
     return Http.get('/categories')

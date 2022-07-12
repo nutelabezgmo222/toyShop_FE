@@ -1,4 +1,4 @@
-import { Http } from '@/api';
+import Http from '@/api';
 
 export function getBrands(subCategoryId) {
     let query = '';

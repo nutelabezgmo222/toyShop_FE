@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import { register } from '@/api/logIn';
 import InputField from '@/components/Atoms/InputField';
 import Button from '@/components/Atoms/Button.vue';
@@ -73,9 +74,16 @@ export default {
             password: ''
         };
     },
+    computed: {
+        ...mapGetters(['rememberToken'])
+    },
     methods: {
+        ...mapActions(['saveUserData']),
         register() {
-            return register(this.getUserData());
+            return register(this.getUserData())
+                .then((response) => {
+                    this.saveUserData(response.user);
+                });
         },
         getUserData() {
             return {

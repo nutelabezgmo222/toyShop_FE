@@ -1,8 +1,30 @@
 import axios from 'axios';
+import store from '@/store';
 
-export const Http = axios.create({
-    baseURL: process.env.VUE_APP_ROOT_API
+const getAuth = () => {
+    console.log(store.getters.rememberToken );
+    return store.getters.rememberToken || '';
+};
+
+const getConfig = () => ({
+    baseURL: process.env.VUE_APP_ROOT_API,
+    headers: {
+        responseType: 'json',
+        Authorization: getAuth()
+    },
 });
 
-
-export default Http;
+export default {
+    get(url) {
+        return axios.get(url, getConfig());
+    },
+    post(url, obj = {}) {
+        return axios.post(url, obj, getConfig());
+    },
+    patch(url, obj = {}) {
+        return axios.patch(url, obj, getConfig());
+    },
+    delete(url) {
+        return axios.delete(url, getConfig());
+    }
+};
