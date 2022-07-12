@@ -3,7 +3,9 @@
     <h2 class="mb-3 text-xl font-bold">
       Registration form
     </h2>
-    <form class="flex flex-col items-center">
+    <form 
+      class="flex flex-col items-center"
+      @submit.prevent>
       <div class="grid grid-cols-2">
         <div class="mr-5">
           <input-field
@@ -52,6 +54,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import { register } from '@/api/logIn';
 import InputField from '@/components/Atoms/InputField';
 import Button from '@/components/Atoms/Button.vue';
@@ -71,15 +74,22 @@ export default {
             password: ''
         };
     },
+    computed: {
+        ...mapGetters(['rememberToken'])
+    },
     methods: {
+        ...mapActions(['saveUserData']),
         register() {
-            return register(this.getUserData);
+            return register(this.getUserData())
+                .then((response) => {
+                    this.saveUserData(response.user);
+                });
         },
         getUserData() {
             return {
                 name: this.name,
                 surname: this.surname,
-                phoneNumber: this.phoneNumber,
+                phone_number: this.phoneNumber,
                 email: this.email,
                 password: this.password
             };

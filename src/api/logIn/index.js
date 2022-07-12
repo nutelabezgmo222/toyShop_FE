@@ -1,4 +1,4 @@
-import { Http } from '@/api';
+import Http from '@/api';
 
 export function register(user) {
     return Http.post('/registration', user)
@@ -15,4 +15,21 @@ export function logIn(loginData) {
           throw err;
       });
 }
+
+export function logOut() {
+    return Http.get('/logout')
+        .then(response => response.data)
+        .catch(err => {
+            throw err;
+        });
+}
+
+export function logInByToken(token) {
+    return Http.post('/tokenLogin', { remember_token: token })
+        .then(response => response.data)
+        .catch(err => {
+            throw err;
+        });
+}
+  
 

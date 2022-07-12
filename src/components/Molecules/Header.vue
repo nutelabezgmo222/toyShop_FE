@@ -18,12 +18,24 @@
         </router-link>
       </nav>
       <div>
-        <router-link to="/login">
+        <router-link
+          v-if="!isUserLogged"
+          to="/login">
           <Button
             type="save"
             button-text="Log in" />
         </router-link>
-        <Button button-text="Log out" />
+        <div 
+          v-else
+          class="flex items-center">
+          <p class="mr-3 text-sm text-indigo-500">
+            Hello {{ user.name }}
+          </p>
+
+          <Button 
+            button-text="Log out"
+            @click="logOut" />
+        </div>
       </div>
     </div>
 
@@ -35,6 +47,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 import { getCategories } from '@/api/categories';
 import Logo from '@/assets/images/logo.png';
 import Button from '@/components/Atoms/Button';
@@ -72,6 +86,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['isUserLogged', 'user']),
         subHeaderByRoute() {
             let route = this.$route.fullPath;
 
@@ -86,6 +101,7 @@ export default {
         this.loadData();
     },
     methods: {
+        ...mapActions(['logOut']),
         loadData() {
             this.isLoading = true;
 
