@@ -2,7 +2,6 @@ import axios from 'axios';
 import store from '@/store';
 
 const getAuth = () => {
-    console.log(store.getters.rememberToken );
     return store.getters.rememberToken || '';
 };
 
