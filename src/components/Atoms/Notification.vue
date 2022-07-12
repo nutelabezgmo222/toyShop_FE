@@ -1,10 +1,21 @@
 <template>
   <transition>
     <div
-      v-if="notificationMessage"
+      v-if="notificationMessage.length"
       class="p-5"
       :class="[{'bg-red-300': type === 'error'}]">
-      {{ notificationMessage }}
+      <div v-if="typeof notificationMessage === 'string'">
+        {{ notificationMessage }}
+      </div>
+      <div v-if="Array.isArray(notificationMessage)">
+        <ul>
+          <li 
+            v-for="(item, idx) in notificationMessage"
+            :key="idx">
+            {{ item }}
+          </li>
+        </ul>
+      </div>
     </div>
   </transition>
 </template>
@@ -21,14 +32,14 @@ export default {
             validator: (newType) => Types.includes(newType)
         },
         message: {
-            type: String,
+            type: [String, Array],
             required: false,
             default: '',
         },
         hideAfter: {
             type: [String, Number],
             required: false,
-            default: '0',
+            default: 0,
             note: 'miliseconds'
         },
     },

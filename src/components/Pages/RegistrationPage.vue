@@ -6,6 +6,9 @@
     <form 
       class="flex flex-col items-center"
       @submit.prevent>
+      <notification
+        :message="errorMessages"
+        class="mb-3" />
       <div class="grid grid-cols-2">
         <div class="mr-5">
           <input-field
@@ -58,11 +61,13 @@ import { mapGetters, mapActions } from 'vuex';
 import { register } from '@/api/logIn';
 import InputField from '@/components/Atoms/InputField';
 import Button from '@/components/Atoms/Button.vue';
+import Notification from '@/components/Atoms/Notification';
 
 export default {
     components: {
         InputField,
-        Button
+        Button,
+        Notification
     },
     data() {
         return {
@@ -71,7 +76,8 @@ export default {
             phoneNumber: '',
 
             email: '',
-            password: ''
+            password: '',
+            errorMessages: []
         };
     },
     computed: {
@@ -83,7 +89,11 @@ export default {
             return register(this.getUserData())
                 .then((response) => {
                     this.saveUserData(response.user);
-                });
+                    this.$router.push('/');
+                }).catch(({response}) => {
+                    let errors = Object.values(response.data.response);
+                    this.errorMessages = errors.map(items => items.join(', '));
+                })
         },
         getUserData() {
             return {
