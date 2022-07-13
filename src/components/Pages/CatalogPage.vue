@@ -21,7 +21,7 @@
               :price="toy.price"
               :description="toy.description"
               :image="toy.image"
-              :rating="2" />
+              :rating="toy.rating" />
           </div>
           <div v-else>
             <h2>Sorry nothing to show</h2>
