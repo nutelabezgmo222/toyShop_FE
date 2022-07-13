@@ -5,7 +5,7 @@
 </template>
 
 <script>
-const ButtonTypes = ['save', 'util'];
+const ButtonTypes = ['save', 'util', 'remove'];
 
 export default {
   props: {
@@ -34,5 +34,9 @@ export default {
   .save {
       color: #fff;
       background-color: blue;
+  }
+  .remove {
+      background-color: tomato;
+      color: #fff;
   }
 </style>

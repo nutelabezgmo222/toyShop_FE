@@ -4,7 +4,6 @@
     viewBox="0 0 24 24"
     stroke-linecap="round"
     stroke-linejoin="round"
-    stroke="currentColor"
     :width="`${width}px`"
     :height="`${height}px`"
     :class="`fill-${fill}`"

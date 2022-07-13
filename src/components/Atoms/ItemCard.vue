@@ -17,16 +17,41 @@
         {{ title }}
       </p>
     </div>
-    <div class="mt-5 flex justify-between">
+    <div
+      class="mt-5 flex justify-between items-center"
+      :class="{'flex-col': alreadyInBasket}">
       <span>{{ price }} <span class="text-sm">UAH</span></span>
-      <span />
+      <div v-if="!alreadyInBasket">
+        <Button
+          type="save"
+          button-text="Buy"
+          @click="addToBasket" />
+      </div>
+      <div 
+        v-else
+        class="flex items-center">
+        <span>In basket</span>
+        &check;
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
+import Button from '@/components/Atoms/Button';
+
 export default {
+    components: {
+        Button,
+    },
     props: {
+        id: {
+            type: [Number, String],
+            required: true,
+            default: null
+        },
         title: {
             type: String,
             required: true,
@@ -57,6 +82,28 @@ export default {
             type: Array,
             required: false,
             default: () => []
+        },
+    },
+    computed: {
+        ...mapGetters(['idsInBasket']),
+        alreadyInBasket() {
+            return this.idsInBasket.includes(this.id);
+        },
+    },
+    methods: {
+        ...mapActions(['addItem']),
+        addToBasket() {
+            this.addItem(this.getItemInfo());
+        },
+        getItemInfo() {
+            return {
+                id: this.id,
+                title: this.title,
+                price: this.price,
+                description: this.description,
+                image: this.image,
+                number: 1
+            };
         },
     },
 }

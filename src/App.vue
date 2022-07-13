@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Header from '@/components/Molecules/Header';
 import Footer from '@/components/Molecules/Footer';
 import LoadingSpinner from '@/components/Atoms/LoadingSpinner';
@@ -38,24 +38,33 @@ export default {
     data() {
         return {
             isLoading: true,
-            navigation: [
+        };
+    },
+    computed: {
+        ...mapGetters(['itemsNumberInBasket']),
+        navigation() {
+            return [
                 { title: 'Home', to: '/' },
                 { title: 'Catalog', to: '/catalog' },
-                { title: 'Basket', to: '/basket' },
+                { title: 'Basket', to: '/basket', marker: this.itemsNumberInBasket || 0},
                 { title: 'Admin', to: '/admin' },
-            ],
-        };
+            ]
+        }
     },
     mounted() {
         this.isLoading = true;
-
-        this.tryToLogIn()
+        let promises = [
+            this.tryToLogIn(),
+            this.loadItemsFromLocalStorage()
+        ];
+        
+        Promise.all(promises)
             .finally(() => {
                 this.isLoading = false;
             });
     },
     methods: {
-        ...mapActions(['tryToLogIn'])
+        ...mapActions(['tryToLogIn', 'loadItemsFromLocalStorage'])
     }
 };
 

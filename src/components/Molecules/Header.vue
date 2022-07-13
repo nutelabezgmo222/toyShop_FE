@@ -13,8 +13,16 @@
           v-for="link in links"
           :key="link.title"
           :to="link.to"
-          class="ml-2 uppercase p-5 navigation_link">
+          class="ml-2 uppercase p-5 navigation_link"
+          :class="{ 'relative': link.marker }">
           {{ link.title }}
+          <span 
+            v-if="link.marker"
+            class="absolute w-5 h-5 rounded-full bg-red-500 bottom-0.5 right-0.5 text-sm flex justify-center items-center">
+            <span class="text-white font-bold">
+              {{ link.marker }}
+            </span>
+          </span>
         </router-link>
       </nav>
       <div>
