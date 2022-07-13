@@ -16,6 +16,7 @@
             class="grid auto-rows-auto gap-4 grid-cols-4">
             <item-card
               v-for="toy in filteredToys"
+              :id="toy.id"
               :key="toy.id"
               :title="toy.title"
               :price="toy.price"
