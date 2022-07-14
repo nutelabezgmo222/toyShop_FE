@@ -8,7 +8,7 @@
         :icon="isContentVisible ? 'chevron-down' : 'chevron-up'"
         class="stroke-2 text-blue-700x" />
     </div>
-    <div v-if="isContentVisible">
+    <div v-show="isContentVisible">
       <slot />
     </div>
   </div>
