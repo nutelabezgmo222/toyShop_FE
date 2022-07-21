@@ -32,7 +32,7 @@
           Dont have an account?
         </p>
         <router-link
-          to="/register"
+          :to="'/register?from=' + routerFromQuery"
           class="text-sm underline">
           Create a new one
         </router-link>
@@ -60,6 +60,11 @@ export default {
             errorMessage: ''
         };
     },
+    computed: {
+        routerFromQuery() {
+            return this.$route?.query.from || 'home';
+        },
+    },
     methods: {
         ...mapActions(['logIn']),
         onLogin() {
@@ -67,7 +72,7 @@ export default {
 
             return this.logIn(this.getLoginData())
                 .then(() => {
-                    this.$router.push('/');
+                    this.$router.push('/' + this.routerFromQuery);
                 })
                 .catch(() => {
                     this.errorMessage = 'Password or email is incorrect';

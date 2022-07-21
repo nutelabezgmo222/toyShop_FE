@@ -4,6 +4,7 @@
       <p>{{ title }} </p>
       <select
         v-model="selectedOption"
+        :disabled="disabled"
         :class="{error: error}">
         <option
           v-for="option in options"
@@ -41,7 +42,12 @@ export default {
             type: Boolean,
             default: false,
             required: false
-        }
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
     },
     emits: ['updated'],
     data() {
@@ -53,6 +59,11 @@ export default {
         selectedOption(newValue) {
             this.$emit('updated', newValue);
         },
+        selectedByDefault(newValue) {
+            if(newValue !== this.selectedOption) {
+                this.selectedOption = newValue;
+            }
+        }
     },
     mounted() {
         if(this.selectedByDefault) {

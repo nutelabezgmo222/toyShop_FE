@@ -57,6 +57,9 @@ export default {
         },
         isUserLogged: (state) => {
             return !!state.remember_token
+        },
+        isUserAdmin: (state) => {
+            return state.is_admin;
         }
     }
 };

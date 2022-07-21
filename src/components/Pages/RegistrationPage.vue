@@ -81,7 +81,9 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['rememberToken'])
+        routerFromQuery() {
+            return this.$route?.query.from || 'home';
+        },
     },
     methods: {
         ...mapActions(['saveUserData']),
@@ -89,7 +91,7 @@ export default {
             return register(this.getUserData())
                 .then((response) => {
                     this.saveUserData(response.user);
-                    this.$router.push('/');
+                    this.$router.push('/' + this.routerFromQuery);
                 }).catch(({response}) => {
                     let errors = Object.values(response.data.response);
                     this.errorMessages = errors.map(items => items.join(', '));

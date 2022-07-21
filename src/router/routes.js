@@ -1,6 +1,7 @@
 import HomePage from '@/components/Pages/HomePage';
 import CatalogPage from '@/components/Pages/CatalogPage';
 import BasketPage from '@/components/Pages/BasketPage';
+import OrderPage from '@/components/Pages/Order/OrderPage';
 import LoginPage from '@/components/Pages/LoginPage';
 import RegistrationPage from '@/components/Pages/RegistrationPage';
 
@@ -12,7 +13,8 @@ const routes = [
     { path: '/', component: HomePage },
     { 
         path: '/register',
-        component: RegistrationPage
+        component: RegistrationPage,
+        props: true
     },
     { 
         path: '/login',
@@ -20,7 +22,11 @@ const routes = [
     },
     { 
         path: '/basket',
-        component: BasketPage
+        component: BasketPage,
+    },
+    { 
+        path: '/order',
+        component: OrderPage,
     },
     { 
         path: '/catalog',

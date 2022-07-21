@@ -66,6 +66,7 @@ export default {
     getters: {
         itemInBasket: state => state.items,
         idsInBasket: state => state.items.map(item => item.id),
-        itemsNumberInBasket: state => state.items.length
+        itemsNumberInBasket: state => state.items.length,
+        orderTotal: state => state.items.reduce((total, item) => total += item.number * item.price, 0)
     }
 };

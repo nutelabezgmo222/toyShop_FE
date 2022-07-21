@@ -6,6 +6,7 @@
         v-model="inputValue"
         :class="{error: error}"
         :type="type"
+        :disabled="disabled"
         :value="value">
     </label>
   </div>
@@ -13,7 +14,7 @@
 
 <script>
 export default {
-    name: 'Input',
+    name: 'InputField',
     props: {
         type: {
             type: String,
@@ -31,6 +32,11 @@ export default {
             required: false,
             note: 'value of input'
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+            required: false
+        },
         error: {
             type: Boolean,
             default: false,
@@ -47,6 +53,16 @@ export default {
         inputValue(newValue) {
             this.$emit('input', newValue);
         },
+        value(newValue) {
+            if(newValue !== this.inputValue) {
+                this.inputValue = newValue;
+            }
+        }
     },
+    mounted() {
+        if(this.value) {
+            this.inputValue = this.value;
+        }
+    }
 }
 </script>
