@@ -15,9 +15,18 @@
           :item="item" />
       </div>
       <div class="mt-10">
-        <Button
-          type="save"
-          button-text="Make order" />
+        <div v-if="isUserLogged">
+          <router-link to="/order">
+            <Button
+              type="save"
+              button-text="Make order" />
+          </router-link>
+        </div>
+        <div v-else>
+          <router-link to="/login?from=order">
+            <span class="underline italic text-xl">Register or log in to make order</span>
+          </router-link>
+        </div>
       </div>
     </div>
     <div v-else>
@@ -38,7 +47,7 @@ export default {
         Button
     },
     computed: {
-        ...mapGetters(['itemInBasket'])
+        ...mapGetters(['itemInBasket', 'isUserLogged'])
     },
     methods: {
         ...mapActions(['clearItems'])

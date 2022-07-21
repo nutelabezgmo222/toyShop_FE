@@ -41,14 +41,19 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['itemsNumberInBasket']),
+        ...mapGetters(['itemsNumberInBasket', 'isUserAdmin']),
         navigation() {
-            return [
+            let result = [
                 { title: 'Home', to: '/' },
                 { title: 'Catalog', to: '/catalog' },
                 { title: 'Basket', to: '/basket', marker: this.itemsNumberInBasket || 0},
-                { title: 'Admin', to: '/admin' },
-            ]
+                { title: 'Profile', to: '/profile'},
+            ];
+
+            if(this.isUserAdmin) {
+                result.push({ title: 'Admin', to: '/admin' });
+            }
+            return result;
         }
     },
     mounted() {
@@ -84,7 +89,7 @@ export default {
   position: relative;
 }
 .wrapper {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 .form_element select, .form_element input {
