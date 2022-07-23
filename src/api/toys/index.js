@@ -21,3 +21,10 @@ export function createToy(toy) {
         });
 }
 
+export function getToyById(id) {
+    return Http.get('/toy/' + id)
+        .then(response => response.data)
+        .catch(err => {
+            throw err;
+        });
+}

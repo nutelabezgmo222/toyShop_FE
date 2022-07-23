@@ -1,9 +1,13 @@
 <template>
   <div class="flex flex-col p-5 border rounded bg-white">
-    <img
-      class="max-w-full"
-      :src="image"
-      :alt="title">
+    <router-link
+      class="block w-full"
+      :to="'/item/' + id">
+      <img
+        class="max-w-full"
+        :src="image"
+        :alt="title">
+    </router-link>
     <div class="flex justify-between mt-2">
       <span>
         rating {{ rating }}

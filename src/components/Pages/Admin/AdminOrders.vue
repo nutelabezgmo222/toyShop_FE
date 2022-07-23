@@ -7,19 +7,39 @@
       <table class="border-collapse border border-slate-500 orders-table w-full">
         <col>
         <col>
-        <colgroup span="3"></colgroup>
+        <colgroup span="3" />
         <thead>
           <tr>
-            <th scope="col">User, id</th>
-            <th scope="col">Items</th>
-            <th scope="col">Total number</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-            <th scope="col">Total for row</th>
-            <th scope="col">Total</th>
-            <th scope="col">Delivery</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
+            <th scope="col">
+              User, id
+            </th>
+            <th scope="col">
+              Items
+            </th>
+            <th scope="col">
+              Total number
+            </th>
+            <th scope="col">
+              Quantity
+            </th>
+            <th scope="col">
+              Price
+            </th>
+            <th scope="col">
+              Total for row
+            </th>
+            <th scope="col">
+              Total
+            </th>
+            <th scope="col">
+              Delivery
+            </th>
+            <th scope="col">
+              Status
+            </th>
+            <th scope="col">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody 
@@ -32,12 +52,14 @@
               scope="rowgroup">
               <p>{{ order.user.name }}, {{ order.user.surname }}</p>
               <p>{{ order.user.phone_number }}</p>
-              <p># {{ order.id}}</p>
+              <p># {{ order.id }}</p>
             </th>
-            <th scope="row">{{ order.toy_orders[0].title }}, #{{ order.toy_orders[0].id }}</th>
+            <th scope="row">
+              {{ order.toy_orders[0].title }}, #{{ order.toy_orders[0].id }}
+            </th>
             <td>{{ order.toy_orders[0].number }}</td>
             <td>{{ order.toy_orders[0].pivot.quantity }}</td>
-            <td>{{ order.toy_orders[0].pivot.price}} UAH</td>
+            <td>{{ order.toy_orders[0].pivot.price }} UAH</td>
             <td>{{ order.toy_orders[0].pivot.price * order.toy_orders[0].pivot.quantity }} UAH</td>
             <td 
               :rowspan="order.toy_orders.length"
@@ -47,8 +69,8 @@
             <td 
               :rowspan="order.toy_orders.length"
               scope="rowgroup">
-              <p>{{ order.delivery.postal_service.title}}</p>
-              <p>{{ order.delivery.postal_service.postal.title}}, {{ order.delivery.city.title }}</p>
+              <p>{{ order.delivery.postal_service.title }}</p>
+              <p>{{ order.delivery.postal_service.postal.title }}, {{ order.delivery.city.title }}</p>
             </td>
             <td 
               :rowspan="order.toy_orders.length"
@@ -77,10 +99,12 @@
           <tr 
             v-for="toy in order.toy_orders.slice(1)"
             :key="toy.id">
-            <th scope="row">{{ toy.title }}, #{{ toy.id }}</th>
+            <th scope="row">
+              {{ toy.title }}, #{{ toy.id }}
+            </th>
             <td>{{ toy.number }}</td>
             <td>{{ toy.pivot.quantity }}</td>
-            <td>{{ toy.pivot.price}} UAH</td>
+            <td>{{ toy.pivot.price }} UAH</td>
             <td>{{ toy.pivot.price * toy.pivot.quantity }} UAH</td>
           </tr>
         </tbody>
