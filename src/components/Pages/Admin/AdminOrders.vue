@@ -64,7 +64,7 @@
             <td 
               :rowspan="order.toy_orders.length"
               scope="rowgroup">
-              {{ getOrderTotalSum(order.toy_orders) }}
+              {{ getOrderTotalSum(order.toy_orders) }} UAH
             </td>
             <td 
               :rowspan="order.toy_orders.length"
@@ -163,7 +163,7 @@ export default {
                 });
         },
         getOrderTotalSum(toys) {
-            return toys.reduce((total, toy) => total += toy.pivot.quantity * toy.pivot.price, 0);
+            return toys.reduce((total, toy) => total += +toy.pivot.price, 0);
         },
         approveOrder(order) {
             return changeOrderStatus({ id: order.id, status_id: 2 })
