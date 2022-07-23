@@ -95,7 +95,7 @@ export default {
                 });
         },
         getOrderTotalSum(toys) {
-            return toys.reduce((total, toy) => total += toy.pivot.quantity * toy.pivot.price, 0);
+            return toys.reduce((total, toy) => total += (toy.pivot.quantity * toy.pivot.price), 0);
         }
     },
 }
