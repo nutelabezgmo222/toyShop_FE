@@ -35,3 +35,13 @@ export function getGenders(subCategoryId) {
             throw err;
         });
 }
+
+export function getRecommendationsForItems(ids) {
+    let query = '?id=' + ids.join(',');
+
+    return Http.get(`/recommendations${query}`)
+        .then(response => response.data)
+        .catch(err => {
+            throw err;
+        });
+}
