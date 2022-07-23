@@ -48,6 +48,13 @@
         @updated="newToy.brand_id = $event" />
 
       <input-field
+        title="Number in the store"
+        type="text"
+        :value="newToy.number"
+        :error="!newToy.number && status.isSent"
+        @input="newToy.number = $event" />
+
+      <input-field
         title="Image URL"
         type="text"
         :value="newToy.image"
@@ -110,7 +117,8 @@ export default {
                 title: '',
                 description: '',
                 price: 0,
-                image: ''
+                image: '',
+                number: 0
             },
             status: {
                 isSent: false,
@@ -177,6 +185,7 @@ export default {
                 this.newToy.price &&
                 this.newToy.selectedGender &&
                 this.newToy.selectedBrand &&
+                this.newToy.number &&
                 this.newToy.selectedAgeLimit;
         }
     }

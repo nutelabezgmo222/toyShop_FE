@@ -82,7 +82,7 @@ export default {
     },
     computed: {
         routerFromQuery() {
-            return this.$route?.query.from || 'home';
+            return this.$route?.query.from || '';
         },
     },
     methods: {

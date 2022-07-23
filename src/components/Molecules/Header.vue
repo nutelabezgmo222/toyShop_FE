@@ -42,7 +42,7 @@
 
           <Button 
             button-text="Log out"
-            @click="logOut" />
+            @click="onLogout" />
         </div>
       </div>
     </div>
@@ -121,6 +121,12 @@ export default {
             return getCategories().then((responce) => {
                 this.categories = responce.list;
             });
+        },
+        onLogout() {
+            return this.logOut()
+                .then(() => {
+                    this.$router.push('/');
+                });
         },
     },
 }

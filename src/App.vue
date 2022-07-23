@@ -41,15 +41,17 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['itemsNumberInBasket', 'isUserAdmin']),
+        ...mapGetters(['itemsNumberInBasket', 'isUserAdmin', 'isUserLogged']),
         navigation() {
             let result = [
                 { title: 'Home', to: '/' },
                 { title: 'Catalog', to: '/catalog' },
                 { title: 'Basket', to: '/basket', marker: this.itemsNumberInBasket || 0},
-                { title: 'Profile', to: '/profile'},
+                
             ];
-
+            if(this.isUserLogged && !this.isUserAdmin) {
+                result.push({ title: 'Profile', to: '/profile'});
+            }
             if(this.isUserAdmin) {
                 result.push({ title: 'Admin', to: '/admin' });
             }
