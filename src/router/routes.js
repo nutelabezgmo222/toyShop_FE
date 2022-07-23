@@ -7,6 +7,7 @@ import RegistrationPage from '@/components/Pages/RegistrationPage';
 import ProfilePage from '@/components/Pages/Profile/ProfilePage';
 import PersonalInfoPage from '@/components/Pages/Profile/PersonalInfoPage';
 import PersonalOrdersPage from '@/components/Pages/Profile/PersonalOrdersPage';
+import ItemPage from '@/components/Pages/Item/ItemPage';
 
 import AdminPage from '@/components/Pages/Admin/AdminPage';
 import AdminCreate from '@/components/Pages/Admin/AdminCreate';
@@ -45,6 +46,11 @@ const routes = [
                 component: PersonalOrdersPage
             }
         ]
+    },
+    { 
+        path: '/item/:itemId',
+        component: ItemPage,
+        props: true
     },
     { 
         path: '/catalog',
