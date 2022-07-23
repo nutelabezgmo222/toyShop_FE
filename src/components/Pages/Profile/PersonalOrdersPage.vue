@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h2 class="text-2xl mb-5">Order page</h2>
+    <h2 class="text-2xl mb-5">
+      Order page
+    </h2>
     <div v-if="isLoading">
       <loading-spinner />
     </div>
@@ -38,7 +40,7 @@
           <div class="p-2 flex items-center justify-between">
             <p>
               Delivery info: 
-              {{ order.delivery.city.title }}, {{ order.delivery.postal_service.title}}, {{ order.delivery.postal_service.postal.title}}
+              {{ order.delivery.city.title }}, {{ order.delivery.postal_service.title }}, {{ order.delivery.postal_service.postal.title }}
             </p>
             <p class="text-xl lining-nums">
               Total: {{ getOrderTotalSum(order.toy_orders) }} UAH

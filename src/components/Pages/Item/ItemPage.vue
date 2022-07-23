@@ -29,20 +29,24 @@
             <p class="italic">
               Brand: {{ data.brand.title }}, {{ data.brand.country.title }}
             </p>
-            <p class="mb-3">{{ data.brand.description }}</p>
+            <p class="mb-3">
+              {{ data.brand.description }}
+            </p>
             <div class="mb-3">
               <p>Tags:</p>
               <div class="flex">
                 <span
                   v-for="subCategory in data.sub_categories"
                   :key="subCategory.id"
-                  class="p-2 bg-red-100 text-orange-600 rounded-lg mr-3" >
+                  class="p-2 bg-red-100 text-orange-600 rounded-lg mr-3">
                   {{ subCategory.title }}
                 </span>
               </div>
             </div>
             <div class="mb-3">
-              <p class="mb-2">Age limits:</p>
+              <p class="mb-2">
+                Age limits:
+              </p>
               <div>
                 <span class="p-2 bg-green-100 text-lime-600 rounded-lg mr-3">
                   {{ data.age_limit.lower_age_limit }} - {{ data.age_limit.upper_age_limit }} 
@@ -50,7 +54,9 @@
               </div>
             </div>
             <div class="mb-3">
-              <p class="mb-2">Gender category:</p>
+              <p class="mb-2">
+                Gender category:
+              </p>
               <div>
                 <span class="p-2 bg-cyan-100 text-cyan-600 rounded-lg mr-3">
                   {{ data.gender_category.title }}
