@@ -1,18 +1,18 @@
 <template>
   <div>
-    <h1>Admin page</h1>
-    <div class="flex">
-      <nav class="flex flex-col h-96 w-1/4 bg-red-100 mr-10 items-center border rounded">
+    <h1 class="text-2xl font-bold mb-5">Admin page</h1>
+    <div class="flex items-start">
+      <nav class="flex flex-col w-1/6 mr-7 border border-black rounded p-5">
         <router-link
           v-for="link in links"
           :key="link.route"
           :to="{name: link.route}"
-          class="w-5/6 border rounded bg-white mt-4 p-2">
+          class="border rounded bg-white mt-4 p-2">
           {{ link.title }}
         </router-link>
       </nav>
-      <div>
-        <router-view />
+      <div class="w-5/6">
+        <router-view class="w-full"/>
       </div>
     </div>
   </div>
@@ -24,9 +24,18 @@ export default {
         return {
             links: [
               { route: 'AdminCreate', title: 'Create' },
-              { route: 'AdminDelete', title: 'Delete' }
+              { route: 'AdminOrders', title: 'Orders' }
             ]
         }
     },
 };
 </script>
+
+<style scoped>
+    .router-link-active {
+        background-color: #ddd;
+        color: black;
+        font-weight: bold;
+        border-color: black;
+    }
+</style>

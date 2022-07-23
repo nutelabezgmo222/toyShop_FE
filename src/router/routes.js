@@ -4,10 +4,13 @@ import BasketPage from '@/components/Pages/BasketPage';
 import OrderPage from '@/components/Pages/Order/OrderPage';
 import LoginPage from '@/components/Pages/LoginPage';
 import RegistrationPage from '@/components/Pages/RegistrationPage';
+import ProfilePage from '@/components/Pages/Profile/ProfilePage';
+import PersonalInfoPage from '@/components/Pages/Profile/PersonalInfoPage';
+import PersonalOrdersPage from '@/components/Pages/Profile/PersonalOrdersPage';
 
 import AdminPage from '@/components/Pages/Admin/AdminPage';
 import AdminCreate from '@/components/Pages/Admin/AdminCreate';
-import AdminDelete from '@/components/Pages/Admin/AdminDelete';
+import AdminOrders from '@/components/Pages/Admin/AdminOrders';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -29,6 +32,21 @@ const routes = [
         component: OrderPage,
     },
     { 
+        path: '/profile',
+        component: ProfilePage,
+        redirect: '/profile/info',
+        children: [
+            {
+                path: 'info',
+                component: PersonalInfoPage
+            },
+            {
+                path: 'orders',
+                component: PersonalOrdersPage
+            }
+        ]
+    },
+    { 
         path: '/catalog',
         component: CatalogPage
     },
@@ -47,9 +65,9 @@ const routes = [
               name: 'AdminCreate'
            },
            {
-              path: 'delete',
-              component: AdminDelete,
-              name: 'AdminDelete'
+              path: 'orders',
+              component: AdminOrders,
+              name: 'AdminOrders'
           }
         ]
     },

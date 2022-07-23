@@ -59,7 +59,7 @@ export default {
             return !!state.remember_token
         },
         isUserAdmin: (state) => {
-            return state.is_admin;
+            return state.user.is_admin;
         }
     }
 };

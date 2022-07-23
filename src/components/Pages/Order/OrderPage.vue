@@ -90,7 +90,7 @@
         <p>
           You can find more information in your
           <router-link 
-            to="/cabinet"
+            to="/profile/orders"
             class="underline">
             personal area
           </router-link>

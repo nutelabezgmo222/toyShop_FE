@@ -15,3 +15,11 @@ export function getPostals() {
             throw err;
         });
 }
+
+export function getMyOrders() {
+    return Http.get('/my_orders')
+        .then(response => response.data)
+        .catch(err => {
+            throw err;
+        });
+}
