@@ -33,7 +33,7 @@
                 <p class="flex-grow">
                   {{ orderToy.price }} UAH
                 </p>
-                <span>{{ orderToy.number }}</span>
+                <span>{{ orderToy.pivot.quantity || ''}}</span>
               </div>
             </div>
           </div>
