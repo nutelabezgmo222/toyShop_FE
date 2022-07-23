@@ -93,7 +93,7 @@
               <Button
                 type="remove"
                 :button-text="orderActions[3]"
-                @click="approveOrder(order)" />
+                @click="closeOrder(order)" />
             </td>
           </tr>
           <tr 
@@ -172,6 +172,16 @@ export default {
 
                     if(orderIdx !== -1) {
                         this.orders[orderIdx] = { ...order, status: this.orderStatuses[1] };
+                    }
+                });
+        },
+        closeOrder(order) {
+            return changeOrderStatus({ id: order.id, status_id: 3 })
+                .then(() => {
+                    let orderIdx = this.orders.findIndex(o => o.id === order.id);
+
+                    if(orderIdx !== -1) {
+                        this.orders[orderIdx] = { ...order, status: this.orderStatuses[2] };
                     }
                 });
         },
